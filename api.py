@@ -4,7 +4,7 @@ import pickle
 import numpy as np
 
 # Cargar el modelo desde el archivo .pkl
-with open('code_final/procfile.pkl', 'rb') as archivo_modelo:
+with open('procfile.pkl', 'rb') as archivo_modelo:
     modelo = pickle.load(archivo_modelo)
 
 # Crear la aplicación FastAPI

@@ -2,6 +2,7 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
+# Copiar los archivos
 COPY requirements.txt .
 COPY procfile.pkl .
 COPY api.py .
