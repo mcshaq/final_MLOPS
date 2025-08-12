@@ -14,6 +14,17 @@ app = FastAPI(
     version="1.0.0"
 )
 
+@app.get("/")
+async def root():
+    return {
+        "status": "ok",
+        "message": "API de Predicción de Precios de Casas en Boston",
+        "endpoints": {
+            "prediccion": "/prediccion/",
+            "docs": "/docs"
+        }
+    }
+
 # Definir el modelo de datos de entrada utilizando Pydantic
 class Casa(BaseModel):
     rooms: float = Field(
