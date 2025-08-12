@@ -1,6 +1,51 @@
 # Predictor de Precios de Casas en Boston
 
-API para predecir precios de casas en Boston basado en el número de habitaciones y el porcentaje de población de bajo estatus.
+API para predecir precios de casas en Boston basado en el número de habitaciones y el porcentaje de población de bajo estatus. 
+
+## Despliegue en Producción
+
+
+### Usando la interfaz web:
+
+1. Ve a https://casas-boston.fly.dev/docs
+2. Haz clic en el endpoint POST `/prediccion/`
+3. Haz clic en "Try it out"
+4. Ingresa los valores en el JSON:
+   ```json
+   {
+     "rooms": 6.0,
+     "lower_status_pct": 15.0
+   }
+   ```
+5. Haz clic en "Execute"
+
+## Parámetros del Modelo
+
+- **`rooms`**: Número promedio de habitaciones (entre 1 y 20)
+- **`lower_status_pct`**: Porcentaje de población de bajo estatus (entre 0 y 100)
+
+## Respuesta de la API
+
+La API retorna un JSON con:
+- **`precio_predicho`**: Precio estimado en miles de dólares
+- **`unidad`**: Unidad de medida
+- **`features_utilizadas`**: Valores usados para la predicción
+
+## Desarrollo Local (Opcional)
+
+Si quieres ejecutar la API localmente para desarrollo:
+
+1. Instalar dependencias:
+```bash
+pip install -r requirements.txt
+```
+
+2. Ejecutar la API:
+```bash
+uvicorn api:app --reload
+```
+
+3. Visitar http://127.0.0.1:8000/docs para ver la documentación
 
 ## Estructura del Proyecto
 
@@ -13,71 +58,13 @@ API para predecir precios de casas en Boston basado en el número de habitacione
 └── fly.toml           # Configuración para Fly.io
 ```
 
-## Despliegue Local
+## Tecnologías Utilizadas
 
-1. Instalar dependencias:
-```bash
-pip install -r requirements.txt
-```
+- **FastAPI**: Framework web para la API
+- **scikit-learn**: Modelo de Machine Learning
+- **Docker**: Para imagenes
+- **Fly.io**: Plataforma de despliegue
+- **Python 3.9**: Lenguaje de programación
 
-2. Ejecutar la API:
-```bash
-uvicorn api:app --reload
-```
-
-3. Visitar http://127.0.0.1:8000/docs para ver la documentación y probar la API
-
-## Despliegue en Fly.io
-
-1. Instalar Fly CLI:
-```bash
-curl -L https://fly.io/install.sh | sh
-```
-
-2. Login en Fly.io:
-```bash
-fly auth login
-```
-
-3. Desplegar la aplicación:
-```bash
-fly launch
-fly deploy
-```
-
-## Uso de la API
-
-Hacer una predicción usando curl:
-
-```bash
-curl -X POST "https://tu-app.fly.dev/prediccion/" \
-     -H "Content-Type: application/json" \
-     -d '{"rooms": 6.0, "lower_status_pct": 15.0}'
-```
-
-O usando Python:
-
-```python
-import requests
-
-url = "https://tu-app.fly.dev/prediccion/"
-data = {
-    "rooms": 6.0,
-    "lower_status_pct": 15.0
-}
-
-response = requests.post(url, json=data)
-print(response.json())
-```
-
-## Parámetros del Modelo
-
-- `rooms`: Número promedio de habitaciones (entre 1 y 20)
-- `lower_status_pct`: Porcentaje de población de bajo estatus (entre 0 y 100)
-
-## Respuesta
-
-La API retorna un JSON con:
-- `precio_predicho`: Precio estimado en miles de dólares
-- `unidad`: Unidad de medida
-- `features_utilizadas`: Valores usados para la predicción 
+## NOTA:
+- Dataset alojado en http://lib.stat.cmu.edu/datasets/boston
